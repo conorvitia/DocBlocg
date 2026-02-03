@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+<h1>Inscription au formulaire de connexion </h1>
+<form method =post>
+    {%csrf_token%}
+    {% if form.non_field_errors%}
+    <div>
+        {% for error in form.non_field_errors%}
+        <p> {{error}}</p>
+        {%endfor%}
+    </div>
+    {%endif%}
+    {{form.as_p}}
+    <button type ="submit">Send </button>
+</form>
+{% endblock %}
