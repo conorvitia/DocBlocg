@@ -46,5 +46,6 @@ def to(request):
     else:
              form=InscriptionForm(request.POST)
     return render ( request,'contact.html',{'form':form})
-def secondformulaire_view(request):
-    return render (request,"toto.html")
+
+def connexion(request):
+    return render (request,"connexion.html")
