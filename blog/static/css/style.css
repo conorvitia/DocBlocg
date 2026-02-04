@@ -69,11 +69,17 @@ body {
 }
 
 .hero {
-  background-image: url('https://images.pexels.com/photos/450035/pexels-photo-450035.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  /*image de fond*/
+  background-image: url('/static/images/pexels-nanamusic-31566538.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: bottom center;
+  background-position: center;
+  
+  /*dimensions*/
+  width: 100%;
   height: 100vh;
+  
+  /*centrage du texte */
   color: #fff;
   display: flex;
   justify-content: center;

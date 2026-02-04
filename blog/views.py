@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from .models import *
 from .forms import InscriptionForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def accueil(request):
     context = {
@@ -20,15 +23,12 @@ def inscription(request):
         if form.is_valid():
             # Création de l'objet sans sauvegarde immédiate en DB
             user = form.save(commit=False)
-            
             # Récupération sécurisée du mot de passe via le dictionnaire
             mot_de_passe = form.cleaned_data.get('pwd')
-            
             # Cryptage du mot de passe (IMPORTANT)
             user.set_password(mot_de_passe)
-            
             user.save()
-            # Assurez-vous que 'projet.html' est bien le NOM de votre URL (path name)
+            # redirection vers la page d'accueil après inscription réussie
             return redirect('accueil') 
     else:
         # Formulaire vide pour une requête GET
@@ -48,4 +48,21 @@ def to(request):
     return render ( request,'contact.html',{'form':form})
 
 def connexion(request):
-    return render (request,"connexion.html")
+     if request.method == 'POST':
+         #récupération du nom de l'utilisateur
+        username = request.POST['username']
+        #récupération du mot de passe
+        password = request.POST['password']
+        #authentification avec la fonctio authenticate de django
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('accueil')
+        else:
+            messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
+     return render (request,"connexion.html")
+ #fonction de déconnexion qui utilise la fonction logout de django pour déconnecter 
+ # l'utilisateur et redirige vers la page d'accueil
+def deconnexion(request):
+    logout(request)
+    return redirect('accueil')

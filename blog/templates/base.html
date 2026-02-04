@@ -11,12 +11,12 @@
     <nav class = "nav">
       <div class="container">
         <h1 class="logo"><a href="#">My Website </a></h1>
-        <ul>
-        <li> <a href ="/">Accueil</a></li> 
-        <li><a href ="contact/">Contact</a></li>
-        <li><a href ="#">A propos</a></li>
-        <li><a href ="message/">Messages</a></li>
-        </ul>
+      <ul>
+      <li><a href="{% url 'accueil' %}">Accueil</a></li> 
+      <li><a href="{% url 'inscription' %}">S'inscrire (Contact)</a></li>
+      <li><a href="#">A propos</a></li>
+      <li><a href="{% url 'connexion' %}">Se connecter (Messages)</a></li>
+      </ul>
       </div>
     </nav>
 
